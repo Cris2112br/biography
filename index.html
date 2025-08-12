@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Biography Generator (A1) — Historical Figure</title>
+<style>
+  :root{--bg:#f6f9fc;--card:#fff;--muted:#475569;--accent:#0ea5a4;--ok:#16a34a;--warn:#b91c1c}
+  html,body{margin:0;padding:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:#0b1220}
+  .wrap{max-width:900px;margin:18px auto;padding:0 16px}
+  .card{background:var(--card);border-radius:14px;box-shadow:0 10px 24px rgba(12,20,40,.06);padding:18px}
+  h1{font-size:22px;margin:0 0 8px}
+  .lead{margin:0;color:var(--muted)}
+  .notice{background:#f1f5f9;border-left:4px solid #cbd5e1;border-radius:8px;padding:10px;margin:14px 0}
+  label{display:block;font-weight:600;margin:10px 0 6px}
+  input,select,textarea{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:10px;box-sizing:border-box;background:#fbfeff}
+  textarea{min-height:64px;resize:vertical}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .col{flex:1;min-width:240px}
+  .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  button{border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+  .primary{background:var(--accent);color:#fff}
+  .ghost{background:#eef2ff;color:#1e293b}
+  .muted{background:#e2e8f0;color:#0f172a}
+  .output{white-space:pre-line;background:#0f172a;color:#e6f1ff;border-radius:12px;padding:12px;margin-top:12px;min-height:56px}
+  .msg{margin-top:8px;font-size:14px}
+  .msg.ok{color:var(--ok)}
+  .msg.err{color:var(--warn)}
+  footer{color:var(--muted);font-size:13px;margin-top:14px}
+  .inline{display:flex;align-items:center;gap:8px}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>👤 Biography — Historical Figure (7th Grade, A1)</h1>
+      <p class="lead">Fill the fields and click <strong>Generate Biography</strong>. A short A1-level biography will be created automatically.</p>
+      <div class="notice">
+        <strong>Enunciado (para estudantes):</strong><br>
+        Pesquise uma <em>pessoa importante da história</em> (cientista, líder, artista, atleta, etc.). Complete os campos abaixo com as informações da sua pesquisa e gere uma biografia curta em inglês. Escreva frases simples. Depois, leia o texto em voz alta e copie-o no caderno.
+      </div>
+
+      <form id="form">
+        <div class="row">
+          <div class="col">
+            <label>Full name</label>
+            <input id="name" type="text" placeholder="e.g. Albert Einstein" />
+          </div>
+          <div class="col">
+            <label>Pronoun</label>
+            <select id="pronoun">
+              <option value="">Select</option>
+              <option value="he">he / his</option>
+              <option value="she">she / her</option>
+              <option value="other">Other (type)</option>
+            </select>
+            <input id="pronounOther" class="hidden" type="text" placeholder="Type pronoun (e.g. they/their)" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Birth city</label>
+            <input id="birthCity" type="text" placeholder="e.g. Ulm" />
+          </div>
+          <div class="col">
+            <label>Birth country</label>
+            <input id="birthCountry" type="text" placeholder="e.g. Germany" />
+          </div>
+          <div class="col">
+            <label>Birth year</label>
+            <select id="birthYear">
+              <option value="">Select year</option>
+              <option>2025</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+<option>2020</option>
+<option>2019</option>
+<option>2018</option>
+<option>2017</option>
+<option>2016</option>
+<option>2015</option>
+<option>2014</option>
+<option>2013</option>
+<option>2012</option>
+<option>2011</option>
+<option>2010</option>
+<option>2009</option>
+<option>2008</option>
+<option>2007</option>
+<option>2006</option>
+<option>2005</option>
+<option>2004</option>
+<option>2003</option>
+<option>2002</option>
+<option>2001</option>
+<option>2000</option>
+<option>1999</option>
+<option>1998</option>
+<option>1997</option>
+<option>1996</option>
+<option>1995</option>
+<option>1994</option>
+<option>1993</option>
+<option>1992</option>
+<option>1991</option>
+<option>1990</option>
+<option>1989</option>
+<option>1988</option>
+<option>1987</option>
+<option>1986</option>
+<option>1985</option>
+<option>1984</option>
+<option>1983</option>
+<option>1982</option>
+<option>1981</option>
+<option>1980</option>
+<option>1979</option>
+<option>1978</option>
+<option>1977</option>
+<option>1976</option>
+<option>1975</option>
+<option>1974</option>
+<option>1973</option>
+<option>1972</option>
+<option>1971</option>
+<option>1970</option>
+<option>1969</option>
+<option>1968</option>
+<option>1967</option>
+<option>1966</option>
+<option>1965</option>
+<option>1964</option>
+<option>1963</option>
+<option>1962</option>
+<option>1961</option>
+<option>1960</option>
+<option>1959</option>
+<option>1958</option>
+<option>1957</option>
+<option>1956</option>
+<option>1955</option>
+<option>1954</option>
+<option>1953</option>
+<option>1952</option>
+<option>1951</option>
+<option>1950</option>
+<option>1949</option>
+<option>1948</option>
+<option>1947</option>
+<option>1946</option>
+<option>1945</option>
+<option>1944</option>
+<option>1943</option>
+<option>1942</option>
+<option>1941</option>
+<option>1940</option>
+<option>1939</option>
+<option>1938</option>
+<option>1937</option>
+<option>1936</option>
+<option>1935</option>
+<option>1934</option>
+<option>1933</option>
+<option>1932</option>
+<option>1931</option>
+<option>1930</option>
+<option>1929</option>
+<option>1928</option>
+<option>1927</option>
+<option>1926</option>
+<option>1925</option>
+<option>1924</option>
+<option>1923</option>
+<option>1922</option>
+<option>1921</option>
+<option>1920</option>
+<option>1919</option>
+<option>1918</option>
+<option>1917</option>
+<option>1916</option>
+<option>1915</option>
+<option>1914</option>
+<option>1913</option>
+<option>1912</option>
+<option>1911</option>
+<option>1910</option>
+<option>1909</option>
+<option>1908</option>
+<option>1907</option>
+<option>1906</option>
+<option>1905</option>
+<option>1904</option>
+<option>1903</option>
+<option>1902</option>
+<option>1901</option>
+<option>1900</option>
+<option>1899</option>
+<option>1898</option>
+<option>1897</option>
+<option>1896</option>
+<option>1895</option>
+<option>1894</option>
+<option>1893</option>
+<option>1892</option>
+<option>1891</option>
+<option>1890</option>
+<option>1889</option>
+<option>1888</option>
+<option>1887</option>
+<option>1886</option>
+<option>1885</option>
+<option>1884</option>
+<option>1883</option>
+<option>1882</option>
+<option>1881</option>
+<option>1880</option>
+<option>1879</option>
+<option>1878</option>
+<option>1877</option>
+<option>1876</option>
+<option>1875</option>
+<option>1874</option>
+<option>1873</option>
+<option>1872</option>
+<option>1871</option>
+<option>1870</option>
+<option>1869</option>
+<option>1868</option>
+<option>1867</option>
+<option>1866</option>
+<option>1865</option>
+<option>1864</option>
+<option>1863</option>
+<option>1862</option>
+<option>1861</option>
+<option>1860</option>
+<option>1859</option>
+<option>1858</option>
+<option>1857</option>
+<option>1856</option>
+<option>1855</option>
+<option>1854</option>
+<option>1853</option>
+<option>1852</option>
+<option>1851</option>
+<option>1850</option>
+<option>1849</option>
+<option>1848</option>
+<option>1847</option>
+<option>1846</option>
+<option>1845</option>
+<option>1844</option>
+<option>1843</option>
+<option>1842</option>
+<option>1841</option>
+<option>1840</option>
+<option>1839</option>
+<option>1838</option>
+<option>1837</option>
+<option>1836</option>
+<option>1835</option>
+<option>1834</option>
+<option>1833</option>
+<option>1832</option>
+<option>1831</option>
+<option>1830</option>
+<option>1829</option>
+<option>1828</option>
+<option>1827</option>
+<option>1826</option>
+<option>1825</option>
+<option>1824</option>
+<option>1823</option>
+<option>1822</option>
+<option>1821</option>
+<option>1820</option>
+<option>1819</option>
+<option>1818</option>
+<option>1817</option>
+<option>1816</option>
+<option>1815</option>
+<option>1814</option>
+<option>1813</option>
+<option>1812</option>
+<option>1811</option>
+<option>1810</option>
+<option>1809</option>
+<option>1808</option>
+<option>1807</option>
+<option>1806</option>
+<option>1805</option>
+<option>1804</option>
+<option>1803</option>
+<option>1802</option>
+<option>1801</option>
+<option>1800</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Alive?</label>
+            <div class="inline">
+              <input id="alive" type="checkbox" /> <span>Yes, this person is alive</span>
+            </div>
+          </div>
+          <div class="col">
+            <label>Death year (if not alive)</label>
+            <select id="deathYear">
+              <option value="">(leave empty if alive)</option>
+              <option>2025</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+<option>2020</option>
+<option>2019</option>
+<option>2018</option>
+<option>2017</option>
+<option>2016</option>
+<option>2015</option>
+<option>2014</option>
+<option>2013</option>
+<option>2012</option>
+<option>2011</option>
+<option>2010</option>
+<option>2009</option>
+<option>2008</option>
+<option>2007</option>
+<option>2006</option>
+<option>2005</option>
+<option>2004</option>
+<option>2003</option>
+<option>2002</option>
+<option>2001</option>
+<option>2000</option>
+<option>1999</option>
+<option>1998</option>
+<option>1997</option>
+<option>1996</option>
+<option>1995</option>
+<option>1994</option>
+<option>1993</option>
+<option>1992</option>
+<option>1991</option>
+<option>1990</option>
+<option>1989</option>
+<option>1988</option>
+<option>1987</option>
+<option>1986</option>
+<option>1985</option>
+<option>1984</option>
+<option>1983</option>
+<option>1982</option>
+<option>1981</option>
+<option>1980</option>
+<option>1979</option>
+<option>1978</option>
+<option>1977</option>
+<option>1976</option>
+<option>1975</option>
+<option>1974</option>
+<option>1973</option>
+<option>1972</option>
+<option>1971</option>
+<option>1970</option>
+<option>1969</option>
+<option>1968</option>
+<option>1967</option>
+<option>1966</option>
+<option>1965</option>
+<option>1964</option>
+<option>1963</option>
+<option>1962</option>
+<option>1961</option>
+<option>1960</option>
+<option>1959</option>
+<option>1958</option>
+<option>1957</option>
+<option>1956</option>
+<option>1955</option>
+<option>1954</option>
+<option>1953</option>
+<option>1952</option>
+<option>1951</option>
+<option>1950</option>
+<option>1949</option>
+<option>1948</option>
+<option>1947</option>
+<option>1946</option>
+<option>1945</option>
+<option>1944</option>
+<option>1943</option>
+<option>1942</option>
+<option>1941</option>
+<option>1940</option>
+<option>1939</option>
+<option>1938</option>
+<option>1937</option>
+<option>1936</option>
+<option>1935</option>
+<option>1934</option>
+<option>1933</option>
+<option>1932</option>
+<option>1931</option>
+<option>1930</option>
+<option>1929</option>
+<option>1928</option>
+<option>1927</option>
+<option>1926</option>
+<option>1925</option>
+<option>1924</option>
+<option>1923</option>
+<option>1922</option>
+<option>1921</option>
+<option>1920</option>
+<option>1919</option>
+<option>1918</option>
+<option>1917</option>
+<option>1916</option>
+<option>1915</option>
+<option>1914</option>
+<option>1913</option>
+<option>1912</option>
+<option>1911</option>
+<option>1910</option>
+<option>1909</option>
+<option>1908</option>
+<option>1907</option>
+<option>1906</option>
+<option>1905</option>
+<option>1904</option>
+<option>1903</option>
+<option>1902</option>
+<option>1901</option>
+<option>1900</option>
+<option>1899</option>
+<option>1898</option>
+<option>1897</option>
+<option>1896</option>
+<option>1895</option>
+<option>1894</option>
+<option>1893</option>
+<option>1892</option>
+<option>1891</option>
+<option>1890</option>
+<option>1889</option>
+<option>1888</option>
+<option>1887</option>
+<option>1886</option>
+<option>1885</option>
+<option>1884</option>
+<option>1883</option>
+<option>1882</option>
+<option>1881</option>
+<option>1880</option>
+<option>1879</option>
+<option>1878</option>
+<option>1877</option>
+<option>1876</option>
+<option>1875</option>
+<option>1874</option>
+<option>1873</option>
+<option>1872</option>
+<option>1871</option>
+<option>1870</option>
+<option>1869</option>
+<option>1868</option>
+<option>1867</option>
+<option>1866</option>
+<option>1865</option>
+<option>1864</option>
+<option>1863</option>
+<option>1862</option>
+<option>1861</option>
+<option>1860</option>
+<option>1859</option>
+<option>1858</option>
+<option>1857</option>
+<option>1856</option>
+<option>1855</option>
+<option>1854</option>
+<option>1853</option>
+<option>1852</option>
+<option>1851</option>
+<option>1850</option>
+<option>1849</option>
+<option>1848</option>
+<option>1847</option>
+<option>1846</option>
+<option>1845</option>
+<option>1844</option>
+<option>1843</option>
+<option>1842</option>
+<option>1841</option>
+<option>1840</option>
+<option>1839</option>
+<option>1838</option>
+<option>1837</option>
+<option>1836</option>
+<option>1835</option>
+<option>1834</option>
+<option>1833</option>
+<option>1832</option>
+<option>1831</option>
+<option>1830</option>
+<option>1829</option>
+<option>1828</option>
+<option>1827</option>
+<option>1826</option>
+<option>1825</option>
+<option>1824</option>
+<option>1823</option>
+<option>1822</option>
+<option>1821</option>
+<option>1820</option>
+<option>1819</option>
+<option>1818</option>
+<option>1817</option>
+<option>1816</option>
+<option>1815</option>
+<option>1814</option>
+<option>1813</option>
+<option>1812</option>
+<option>1811</option>
+<option>1810</option>
+<option>1809</option>
+<option>1808</option>
+<option>1807</option>
+<option>1806</option>
+<option>1805</option>
+<option>1804</option>
+<option>1803</option>
+<option>1802</option>
+<option>1801</option>
+<option>1800</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Death place (optional)</label>
+            <input id="deathPlace" type="text" placeholder="e.g. Princeton, USA" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Occupation / Role</label>
+            <select id="job">
+              <option value="">Select</option>
+              <option>scientist</option><option>inventor</option><option>writer</option><option>poet</option>
+              <option>artist</option><option>painter</option><option>musician</option><option>composer</option><option>singer</option>
+              <option>actor</option><option>activist</option><option>leader</option><option>president</option><option>queen</option><option>king</option>
+              <option>explorer</option><option>teacher</option><option>engineer</option><option>doctor</option><option>athlete</option>
+              <option>mathematician</option><option>philosopher</option><option>entrepreneur</option>
+              <option value="other">Other (type)</option>
+            </select>
+            <input id="jobOther" class="hidden" type="text" placeholder="Type occupation (e.g. physicist)" />
+          </div>
+          <div class="col">
+            <label>Field (optional)</label>
+            <select id="field">
+              <option value="">(optional)</option>
+              <option>science</option><option>politics</option><option>arts</option><option>sports</option>
+              <option>literature</option><option>human rights</option><option>technology</option><option>education</option>
+              <option value="other">Other (type)</option>
+            </select>
+            <input id="fieldOther" class="hidden" type="text" placeholder="Type field (e.g. physics)" />
+          </div>
+        </div>
+
+        <label>Main achievement / contribution (short sentence)</label>
+        <input id="achievement" type="text" placeholder="e.g. He developed the theory of relativity." />
+
+        <label>Why is this person important? (optional, short sentence)</label>
+        <input id="importance" type="text" placeholder="e.g. Her work changed modern medicine." />
+
+        <label>Famous work(s) (optional)</label>
+        <input id="works" type="text" placeholder="e.g. The Starry Night; Hamlet; The Long Walk to Freedom" />
+
+        <div class="btns">
+          <button type="button" class="primary" id="gen">Generate Biography</button>
+          <button type="button" class="ghost" id="copy">Copy text</button>
+          <button type="button" class="muted" id="clear">Clear</button>
+        </div>
+
+        <div class="msg err" id="msg" style="display:none"></div>
+        <div class="output" id="out" aria-live="polite">Your biography will appear here.</div>
+      </form>
+
+      <footer>Teacher note: Evaluates A1 control of past simple (was born / died), be (is/was), articles (a/an), places, occupations, and ability to summarize a contribution in 1–2 simple sentences.</footer>
+    </div>
+  </div>
+
+<script>
+  const $ = (id)=>document.getElementById(id);
+  const msg = $('msg'), out = $('out');
+
+  function t(v){return (v||'').trim();}
+  function esc(s){return (s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');}
+  function article(word){return /^[aeiou]/i.test(word) ? 'an ' : 'a ';}
+  function getPronounSet(){ // subject, possessive
+    const pSel = t($('pronoun').value);
+    if(pSel==='he') return ['He','his'];
+    if(pSel==='she') return ['She','her'];
+    const raw = t($('pronounOther').value||'they');
+    // crude mapping: default to they/their
+    return [raw.charAt(0).toUpperCase()+raw.slice(1).split('/')[0], 'their'];
+  }
+
+  function syncOther(selectId, inputId){
+    const sel = $(selectId), inp = $(inputId);
+    function toggle(){ inp.classList.toggle('hidden', sel.value!=='other'); if(sel.value!=='other') inp.value=''; }
+    sel.addEventListener('change', toggle);
+    toggle();
+  }
+
+  syncOther('pronoun','pronounOther');
+  syncOther('job','jobOther');
+  syncOther('field','fieldOther');
+
+  $('gen').addEventListener('click', ()=>{
+    msg.style.display='none'; msg.textContent='';
+
+    const [Sub, Poss] = getPronounSet();
+
+    const data = {
+      name: t($('name').value),
+      pronoun: t($('pronoun').value),
+      pronounOther: t($('pronounOther').value),
+      birthCity: t($('birthCity').value),
+      birthCountry: t($('birthCountry').value),
+      birthYear: t($('birthYear').value),
+      alive: $('alive').checked,
+      deathYear: t($('deathYear').value),
+      deathPlace: t($('deathPlace').value),
+      job: t($('job').value)==='other' ? t($('jobOther').value) : t($('job').value),
+      field: t($('field').value)==='other' ? t($('fieldOther').value) : t($('field').value),
+      achievement: t($('achievement').value),
+      importance: t($('importance').value),
+      works: t($('works').value)
+    };
+
+    // Validation for key fields
+    const missing = [];
+    if(!data.name) missing.push('Full name');
+    if(!t($('pronoun').value)) missing.push('Pronoun');
+    if($('pronoun').value==='other' && !data.pronounOther) missing.push('Custom pronoun');
+    if(!data.birthCity) missing.push('Birth city');
+    if(!data.birthCountry) missing.push('Birth country');
+    if(!data.birthYear) missing.push('Birth year');
+    if(!data.job) missing.push('Occupation / Role');
+    if(!data.achievement) missing.push('Main achievement');
+
+    if(missing.length){
+      msg.textContent = 'Please fill in: ' + missing.join(', ') + '.';
+      msg.className = 'msg err';
+      msg.style.display = 'block';
+      out.textContent = 'Your biography will appear here.';
+      return;
+    }
+
+    // Build sentences
+    const parts = [];
+    parts.push(`${esc(data.name)} was born in ${esc(data.birthYear)} in ${esc(data.birthCity)}, ${esc(data.birthCountry)}.`);
+
+    // Occupation + field sentence
+    let jobTxt = data.job ? article(data.job) + esc(data.job) : '';
+    if(data.alive) parts.push(`${Sub} is ${jobTxt}.`);
+    else parts.push(`${Sub} was ${jobTxt}.`);
+
+    if(data.field){
+      parts[parts.length-1] = parts[parts.length-1].replace(/\.$/,''); // remove last dot to append
+      parts[parts.length-1] += ` in ${esc(data.field)}.`;
+    }
+
+    if(data.works) parts.push(`Famous work(s): ${esc(data.works)}.`);
+
+    if(data.achievement) parts.push(`${Sub} is famous for ${esc(data.achievement)}` + (/[.!?]$/.test(data.achievement)?'':'.'));
+
+    if(data.importance) parts.push(`This person is important because ${esc(data.importance)}` + (/[.!?]$/.test(data.importance)?'':'.'));
+
+    if(!data.alive && data.deathYear){
+      const place = data.deathPlace ? ` in ${esc(data.deathPlace)}` : '';
+      parts.push(`${Sub} died in ${esc(data.deathYear)}${place}.`);
+    }
+
+    out.textContent = parts.join('\n');
+    out.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+
+  $('clear').addEventListener('click', ()=>{
+    document.querySelectorAll('input, textarea').forEach(el=>{
+      if(el.type==='checkbox') el.checked=false; else el.value='';
+    });
+    document.querySelectorAll('select').forEach(s=>s.value='');
+    out.textContent = 'Your biography will appear here.';
+    msg.style.display='none'; msg.textContent='';
+  });
+
+  $('copy').addEventListener('click', ()=>{
+    const textToCopy = out.textContent || '';
+    if(!textToCopy || textToCopy === 'Your biography will appear here.') {
+      msg.textContent = 'Generate a biography before copying.';
+      msg.className = 'msg err';
+      msg.style.display = 'block';
+      return;
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(textToCopy).then(()=>{
+        msg.textContent = 'Text copied to clipboard.';
+        msg.className = 'msg ok';
+        msg.style.display = 'block';
+      }, ()=>fallbackCopy(textToCopy));
+    } else { fallbackCopy(textToCopy); }
+  });
+
+  function fallbackCopy(txt){
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.style.position='fixed'; ta.style.opacity='0'; ta.style.left='-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+    msg.textContent = 'Text copied (fallback).';
+    msg.className = 'msg ok';
+    msg.style.display = 'block';
+  }
+</script>
+</body>
+</html>
